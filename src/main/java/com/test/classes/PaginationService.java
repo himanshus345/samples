@@ -7,18 +7,16 @@ import javax.json.JsonArray;
 
 public class PaginationService {
 
-	public List<Person> getUsers(String searchText, int limit, String sortType) {
+	public List<String> getUsers(String searchText, int limit, String sortType) {
 
 		PersonDAO users = new PersonDAOImpl();
 		JsonArray listOfUsers =  users.getRecords(searchText, limit, sortType);
-		List<Person> list = new ArrayList<>();
+		List<String> list = new ArrayList<>();
 		
 		if( listOfUsers != null && !listOfUsers.isEmpty() ){
 			for(int i=0; i<listOfUsers.size(); i++) {
 				
-				Person person = new Person();
-				person.setName(listOfUsers.getJsonObject(i).getString("name"));
-				list.add(person);
+				list.add(listOfUsers.getJsonObject(i).getString("name"));
 			}
 			
 		}

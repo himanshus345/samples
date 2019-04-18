@@ -39,11 +39,11 @@ public class MongoManager {
 			
 			mongoClient = getMongoClient();
 
-			MongoDatabase database = mongoClient.getDatabase("localCollection");
+			MongoDatabase database = mongoClient.getDatabase("local");
 			MongoCollection<Document> collection = database.getCollection(collectionName);
 			MongoCursor<Document> cursor = collection.find(queryDocument).sort(sortCriteria).limit(limit).iterator();
 			
-			if (cursor != null && cursor.hasNext()) {
+			while (cursor.hasNext()) {
 				document = cursor.next();
 				documentsBuilder.add( convertStringToJson( document.toJson() ) );
 			}

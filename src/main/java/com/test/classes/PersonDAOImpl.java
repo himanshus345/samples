@@ -19,7 +19,7 @@ public class PersonDAOImpl implements PersonDAO {
         	Document queryDocument = new Document();
             
             if( searchText != null && !searchText.isEmpty()) {
-           	 Document regex = new Document();
+           	    Document regex = new Document();
                 regex.put("$regex", searchText);
                 regex.put("$options", "i");
                 
@@ -30,7 +30,7 @@ public class PersonDAOImpl implements PersonDAO {
             if( sortType == "" ) {
             	sortDocument.put("_id", 1);
             }else {
-            	sortDocument.put(sortType, -1);
+            	sortDocument.put(sortType, 1);
             }
 
             result = mongoManager.findDocument("users",queryDocument,sortDocument,limit);
